@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/dofob/products', require('./routes/productRoute'));
 app.use('/dofob/user', require('./routes/userRoute'));
 app.use('/dofob/orders', require('./routes/orderRoute'));
+app.use('/dofob/payment', require('./routes/paymentRoute'));
 app.use(errorHandler);
 
 app.listen(port, () => {
