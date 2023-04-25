@@ -6,7 +6,6 @@ const { errorHandler } = require('./middlewares/errorMiddleware')
 const port = process.env.PORT || 3000;
 const connectDb = require('./config/db')
 
-
 connectDb()
 //middlewares
 app.use(express.json());

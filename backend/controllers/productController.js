@@ -13,13 +13,11 @@ const getProducts = asyncHandler(async (req, res) => {
         date: -1
     });
     res.status(200).json(products);
-
 })
 
 //@desc Admin to mange products
 //@route POST /dofob/poducts/admin
 //@access Private
-
 const setProducts = asyncHandler(async (req, res) => {
     const { name, desc, price, image_url, quantity, categories } = req.body;
     const result = await cloudinary.uploader.upload(req.file.path); // image upload to cloudinary
@@ -38,16 +36,15 @@ const setProducts = asyncHandler(async (req, res) => {
             categories,
         });
         res.status(201).json(product);
-
     } catch (error) {
         if (error.name === "ValidationError") {
             res.status(400).json({ message: error.message });
         } else {
             console.error(error);
             res.status(500).json({ message: "Server error" });
-        }
-    }
-})
+        };
+    };
+});
 
 //@desc delete products
 //@route GET /dofob/poducts/admin/:id
@@ -58,17 +55,17 @@ const deleteProducts = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
         res.status(400)
-        throw new Error("Product not found")
-    }
+        throw new Error("Product not found");
+    };
     //delete image from cloudinary 
     await cloudinary.uploader.destroy(product.public_id);
-    console.log(product.public_id)
+    console.log(product.public_id);
     await product.deleteOne();
     res.status(200).json(
         {
             message: "Admin has succefully deleted this product "
-        })
-})
+        });
+});
 
 //@desc Upadate a produ cts
 //@route PUT /dofob/poducts/admin/:id
@@ -78,16 +75,15 @@ const updateProducts = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
         res.status(400)
-        throw new Erorr("Product not found")
-    }
-    const updateProduct = await Product.findByIdAndUpdate(req.params.id, req.body)
-    res.status(201).json({ message: "Admin has succefully upated this product " })
-})
-
+        throw new Erorr("Product not found");
+    };
+    const updateProduct = await Product.findByIdAndUpdate(req.params.id, req.body);
+    res.status(201).json({ message: "Admin has succefully upated this product " });
+});
 
 module.exports = {
     getProducts,
     setProducts,
     deleteProducts,
     updateProducts,
-}
+};

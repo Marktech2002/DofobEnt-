@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 
 const protectUser = asyncHandler(async (req, res, next) => {
-    let token
+    let token ;
     // check for token in header
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
@@ -18,17 +18,17 @@ const protectUser = asyncHandler(async (req, res, next) => {
         } catch (error) {
             console.log(error)
             res.status(401)
-            throw new Error('Not authorized')
-        }
-    }
+            throw new Error('Not authorized') ;
+        };
+    };
     // Missing token
     if (!token) {
         res.status(401)
         throw new Error('Not authorized , no token')
 
-    }
+    };
 
-})
+});
 
 /*
 This second middleware (protectAdmin) checks whether the user 
@@ -46,8 +46,8 @@ const protectAdmin = asyncHandler(async (req, res, next) => {
      else {
       res.status(401)
       throw new Error("User is not an admin ");
-    } 
-})
+    } ;
+});
 
 
 
