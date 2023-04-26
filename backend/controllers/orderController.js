@@ -72,7 +72,7 @@ const deleteAnOrder = asyncHandler(async (req, res) => {
         throw new Error("This particular order does not Exist");
     };
     await order.deleteOne();
-    res.status(200).json({ message: " Admin deleted this order successfully " }, order);
+    res.status(200).json({ message: " Admin deleted this order successfully "  ,  order : order});
 });
 
 module.exports = {

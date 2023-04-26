@@ -78,7 +78,7 @@ const updateProducts = asyncHandler(async (req, res) => {
         throw new Erorr("Product not found");
     };
     const updateProduct = await Product.findByIdAndUpdate(req.params.id, req.body);
-    res.status(201).json({ message: "Admin has succefully upated this product " });
+    res.status(201).json({ message: "Admin has succefully upated this product " , product :updateProduct });
 });
 
 module.exports = {
